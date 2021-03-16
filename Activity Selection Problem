@@ -1,0 +1,158 @@
+/*First we sort the list according to the ending time using java comparable method and keep the values of classes in the arraylist. then we sort it using collections method.
+then we compare the sorted list's end time to next element's start time. if start time greater than or equal to the previous element's ending number then it run forward and we count 1
+And in the if statement we also print the activities name.*/
+
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
+
+class Activity_Selection_problem_Helper_Class implements Comparable<Activity_Selection_problem_Helper_Class>{
+
+String Activity;
+int start,end;    
+
+    public Activity_Selection_problem_Helper_Class() {
+        
+        
+    }
+
+    public Activity_Selection_problem_Helper_Class(String Activity, int start, int end) {
+    
+        this.Activity = Activity;
+        this.start = start;
+        this.end = end;
+    
+    }
+
+    public String getActivity() {
+
+        return Activity;
+
+    }
+
+    public void setActivity(String Activity) {
+
+        this.Activity = Activity;
+
+    }
+
+    public int getStart() {
+
+        return start;
+
+    }
+
+    public void setStart(int start) {
+
+        this.start = start;
+
+    }
+
+    public int getEnd() {
+
+        return end;
+
+    }
+
+    public void setEnd(int end) {
+
+        this.end = end;
+
+    }
+
+    @Override
+    public String toString() {
+
+        return  "Activity=" + Activity + " start=" + start + " end=" + end ;
+
+    }
+
+    @Override
+    public int compareTo(Activity_Selection_problem_Helper_Class t) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+//return String.valueOf(this.getEnd()).compareTo(String.valueOf(t.getEnd()));
+
+if(this.getEnd()>t.getEnd()){
+    
+    return 1;
+    
+}else if(t.getEnd()>this.getEnd()) {
+    
+    return -1;
+    
+}else{
+    
+    return 0;
+    
+}
+
+    }
+
+}
+
+
+public class Activity_Selection_problem {
+
+    static Scanner scanner=new Scanner(System.in);
+    
+    static int total,start,end,answer=0;
+    
+    static Activity_Selection_problem_Helper_Class helper=new Activity_Selection_problem_Helper_Class();
+    
+    static String activity;
+    
+   static List<Activity_Selection_problem_Helper_Class> list=new ArrayList<>();
+    
+    public static void main(String[] args) {
+        
+        total=scanner.nextInt();
+        
+        for(int i=0;i<total;i++){
+            
+          //  System.out.println("activity: ");
+            activity=scanner.next();
+            
+            //System.out.println("start: ");
+            start=scanner.nextInt();
+            
+            //System.out.println("end: ");
+            end=scanner.nextInt();
+            
+       helper=new Activity_Selection_problem_Helper_Class(activity,start,end);     
+            
+      list.add(helper);
+       
+        }
+        
+        Collections.sort(list);
+        
+        System.out.println("sorted list is: ");
+        
+        for(int i=0;i<list.size();i++){
+            
+            System.out.println(list.get(i).toString()+" ");
+            
+        }
+        
+        int j=0;
+        
+        for(int i=0;i<list.size()-1;i++){
+            
+            if( list.get(j).getEnd()<=list.get(i+1).getStart() ){
+                
+                answer++;
+                
+                j=i;
+                
+            }
+            
+        }
+        
+        System.out.println("total: "+(answer));
+        
+    }
+    
+}
