@@ -1,1 +1,1 @@
-# HACKER-RANK
+# HACKER-RANK problem solutions
